@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import StarRating from './StarRating';
+import { Loader } from './Loader';
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
@@ -11,8 +12,8 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [query, setQuery] = useState('How to train your dragon');
-  const [selectedId, setSelectedId] = useState('tt0892769');
+  const [query, setQuery] = useState('');
+  const [selectedId, setSelectedId] = useState('');
 
   function handleSelectMovie(id) {
     setSelectedId((selectedId) => (id === selectedId ? null : id));
@@ -32,22 +33,24 @@ export default function App() {
 
   useEffect(
     function () {
+      const controller = new AbortController();
       async function fetchMovies() {
         try {
           setLoading(true);
           setError('');
           const res = await fetch(
-            `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+            `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
+            { signal: controller.signal }
           );
 
           if (!res.ok)
             throw new Error('Something went wrong with fetching movies');
           const data = await res.json();
-          // console.log(data);
           if (data.Response === 'False') throw new Error(data.Error);
           setMovies(data.Search);
+          setError('');
         } catch (error) {
-          setError(error.message);
+          if (error.name !== 'AbortError') setError(error.message);
         } finally {
           setLoading(false);
         }
@@ -59,7 +62,12 @@ export default function App() {
         return;
       }
 
+      handleCloseMovie();
       fetchMovies();
+
+      return function () {
+        controller.abort();
+      };
     },
     [query]
   );
@@ -105,10 +113,6 @@ export default function App() {
       </Main>
     </>
   );
-}
-
-function Loader() {
-  return <p className='loader'>Loading...</p>;
 }
 
 function ErrorMessage({ message }) {
@@ -200,7 +204,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const [userRating, setUserRating] = useState('');
 
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
-  console.log(isWatched);
   const watchedUserRating = watched.find(
     (movie) => movie.imdbID === selectedId
   )?.userRating;
@@ -233,6 +236,21 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     onCloseMovie();
   }
 
+  useEffect(
+    function () {
+      function callback(e) {
+        if (e.code === 'Escape') {
+          onCloseMovie();
+        }
+      }
+      document.addEventListener('keydown', callback);
+      return function () {
+        document.removeEventListener('keydown', callback);
+      };
+    },
+    [onCloseMovie]
+  );
+
   useEffect(() => {
     async function getMovieDetails() {
       setIsLoading(true);
@@ -245,6 +263,15 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     }
     getMovieDetails();
   }, [selectedId]);
+
+  useEffect(() => {
+    if (!title) return;
+    document.title = `Movie | ${title}`;
+
+    return function () {
+      document.title = 'usePopcorn';
+    };
+  }, [title]);
 
   return (
     <div className='details'>
