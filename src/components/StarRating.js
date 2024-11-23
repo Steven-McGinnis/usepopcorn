@@ -11,6 +11,19 @@ const starContainerStyle = {
   display: 'flex',
 };
 
+/**
+ * StarRating component to display a star rating system.
+ *
+ * @param {Object} props - Component props.
+ * @param {number} [props.maxRating=5] - Maximum number of stars.
+ * @param {string} [props.color='#fcc419'] - Color of the stars.
+ * @param {number} [props.size=48] - Size of the stars.
+ * @param {string} [props.className=''] - Additional class names for the container.
+ * @param {Array<string>} [props.messages=[]] - Messages to display for each rating.
+ * @param {number} [props.defaultRating=0] - Default rating value.
+ * @param {Function} [props.onSetRating=() => {}] - Callback function when rating is set.
+ * @returns {JSX.Element} The StarRating component.
+ */
 const StarRating = ({
   maxRating = 5,
   color = '#fcc419',
@@ -73,6 +86,18 @@ const StarRating = ({
 
 export default StarRating;
 
+/**
+ * Star component to display a single star.
+ *
+ * @param {Object} props - Component props.
+ * @param {Function} props.onRate - Function to call when the star is clicked.
+ * @param {boolean} props.full - Whether the star is full or empty.
+ * @param {Function} props.onHoverIn - Function to call when the mouse enters the star.
+ * @param {Function} props.onHoverOut - Function to call when the mouse leaves the star.
+ * @param {string} props.color - Color of the star.
+ * @param {number} props.size - Size of the star.
+ * @returns {JSX.Element} The Star component.
+ */
 function Star({ onRate, full, onHoverIn, onHoverOut, color, size }) {
   const starStyle = {
     width: `${size}px`,

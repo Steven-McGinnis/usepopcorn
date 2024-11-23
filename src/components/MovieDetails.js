@@ -2,6 +2,18 @@ import React, { useEffect, useState } from 'react';
 import StarRating from './StarRating';
 import Loader from './Loader';
 
+/**
+ * MovieDetails component displays detailed information about a selected movie,
+ * allows the user to rate the movie, and add it to the watched list.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string} props.selectedId - The IMDb ID of the selected movie.
+ * @param {function} props.onCloseMovie - Callback function to close the movie details view.
+ * @param {function} props.onAddWatched - Callback function to add the movie to the watched list.
+ * @param {Array} props.watched - List of watched movies.
+ * @returns {JSX.Element} The rendered MovieDetails component.
+ */
 function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const KEY = '8a876b0e';
   const [movie, setMovie] = useState({});
@@ -26,6 +38,23 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     Genre: genre,
   } = movie;
 
+  /**
+   * Handles the addition of a new watched movie.
+   * Creates a new movie object with the selected movie details and user rating,
+   * then calls the onAddWatched function to add the movie to the watched list
+   * and closes the movie details view.
+   *
+   * @function handleAdd
+   * @param {string} selectedId - The IMDb ID of the selected movie.
+   * @param {string} title - The title of the selected movie.
+   * @param {string} year - The release year of the selected movie.
+   * @param {string} poster - The poster URL of the selected movie.
+   * @param {string} imdbRating - The IMDb rating of the selected movie.
+   * @param {string} runtime - The runtime of the selected movie.
+   * @param {number} userRating - The user rating for the selected movie.
+   * @param {function} onAddWatched - Callback function to add the movie to the watched list.
+   * @param {function} onCloseMovie - Callback function to close the movie details view.
+   */
   function handleAdd() {
     const newWatchedMovie = {
       imdbID: selectedId,

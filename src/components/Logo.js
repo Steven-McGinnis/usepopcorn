@@ -1,3 +1,12 @@
+/**
+ * Logo component that displays a popcorn emoji and the title "usePopcorn".
+ *
+ * @component
+ * @example
+ * return (
+ *   <Logo />
+ * )
+ */
 function Logo() {
   return (
     <div className='logo'>

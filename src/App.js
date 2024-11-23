@@ -15,6 +15,44 @@ export const average = (arr) =>
 
 const KEY = '8a876b0e';
 
+/**
+ * The main application component that handles fetching and displaying movies,
+ * managing the watched movies list, and handling user interactions.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * // Usage example:
+ * import App from './App';
+ *
+ * function Main() {
+ *   return <App />;
+ * }
+ *
+ * @typedef {Object} Movie
+ * @property {string} imdbID - The IMDb ID of the movie.
+ * @property {string} Title - The title of the movie.
+ * @property {string} Year - The release year of the movie.
+ * @property {string} Poster - The URL of the movie poster.
+ *
+ * @typedef {Object} Error
+ * @property {string} message - The error message.
+ *
+ * @typedef {Object} NavBarProps
+ * @property {string} query - The search query.
+ * @property {function} setQuery - Function to update the search query.
+ *
+ * @typedef {Object} MovieDetailsProps
+ * @property {string} selectedId - The ID of the selected movie.
+ * @property {function} onCloseMovie - Function to close the movie details.
+ * @property {function} onAddWatched - Function to add a movie to the watched list.
+ * @property {Movie[]} watched - The list of watched movies.
+ *
+ * @typedef {Object} WatchedMoviesListProps
+ * @property {Movie[]} watched - The list of watched movies.
+ * @property {function} onDeleteWatched - Function to delete a movie from the watched list.
+ */
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
