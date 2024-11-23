@@ -61,23 +61,55 @@ export default function App() {
   const [query, setQuery] = useState('');
   const [selectedId, setSelectedId] = useState('');
 
+  /**
+   * Handles the selection of a movie by its ID.
+   * If the selected movie ID is the same as the current selected ID, it deselects the movie.
+   * Otherwise, it sets the selected ID to the provided movie ID.
+   *
+   * @param {number} id - The ID of the movie to select.
+   */
   function handleSelectMovie(id) {
     setSelectedId((selectedId) => (id === selectedId ? null : id));
   }
 
+  /**
+   * Handles the closing of a movie by setting the selected movie ID to null.
+   */
   function handleCloseMovie() {
     setSelectedId(null);
   }
 
+  /**
+   * Adds a movie to the watched list.
+   *
+   * @param {Object} movie - The movie object to add to the watched list.
+   */
   function handleAddWatched(movie) {
     setWatched((watched) => [...watched, movie]);
   }
 
+  /**
+   * Handles the deletion of a watched movie by its ID.
+   *
+   * @param {string} id - The IMDb ID of the movie to be deleted.
+   */
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
 
   useEffect(
+    /**
+     * Fetches movies based on the search query.
+     * If the query is less than 3 characters, it clears the movie list.
+     * If the fetch is successful, it sets the movies state with the fetched data.
+     * If there is an error, it sets the error state with the error message.
+     * Finally, it sets the loading state to false.
+     *
+     * @async
+     * @function
+     * @param {string} query - The search query to fetch movies for
+     * @returns {function} The cleanup function to abort the fetch request.
+     */
     function () {
       const controller = new AbortController();
       async function fetchMovies() {
