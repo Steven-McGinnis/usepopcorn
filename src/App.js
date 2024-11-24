@@ -9,11 +9,10 @@ import Box from './components/Box';
 import Main from './components/Main';
 import NumResults from './components/NumResults';
 import MovieDetails from './components/MovieDetails';
+import { useMovies } from './useMovies';
 
 export const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
-
-const KEY = '8a876b0e';
 
 /**
  * The main application component that handles fetching and displaying movies,
@@ -52,13 +51,24 @@ const KEY = '8a876b0e';
  * @typedef {Object} WatchedMoviesListProps
  * @property {Movie[]} watched - The list of watched movies.
  * @property {function} onDeleteWatched - Function to delete a movie from the watched list.
+ *
+ * @typedef {Object} UseMoviesResult
+ * @property {Movie[]} movies - The list of movies fetched based on the query.
+ * @property {boolean} loading - The loading state of the fetch operation.
+ * @property {Error|null} error - The error object if an error occurred, otherwise null.
  */
 export default function App() {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
   const [query, setQuery] = useState('');
   const [selectedId, setSelectedId] = useState('');
+
+  /**
+   * Custom hook to fetch movies based on a search query.
+   * @function
+   * @param {string} query - The search query to fetch movies.
+   * @param {function} handleCloseMovie - Function to handle closing the movie details.
+   * @returns {UseMoviesResult} The result of the fetch operation.
+   */
+  const { movies, loading, error } = useMovies(query, handleCloseMovie);
 
   /**
    * State hook to manage the list of watched items.
@@ -97,8 +107,6 @@ export default function App() {
    */
   function handleAddWatched(movie) {
     setWatched((watched) => [...watched, movie]);
-
-    // localStorage.setItem('watched', JSON.stringify([...watched, movie]));
   }
 
   /**
@@ -121,59 +129,6 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('watched', JSON.stringify(watched));
   }, [watched]);
-
-  useEffect(
-    /**
-     * Fetches movies based on the search query.
-     * If the query is less than 3 characters, it clears the movie list.
-     * If the fetch is successful, it sets the movies state with the fetched data.
-     * If there is an error, it sets the error state with the error message.
-     * Finally, it sets the loading state to false.
-     *
-     * @async
-     * @function
-     * @param {string} query - The search query to fetch movies for
-     * @returns {function} The cleanup function to abort the fetch request.
-     */
-    function () {
-      const controller = new AbortController();
-      async function fetchMovies() {
-        try {
-          setLoading(true);
-          setError('');
-          const res = await fetch(
-            `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
-            { signal: controller.signal }
-          );
-
-          if (!res.ok)
-            throw new Error('Something went wrong with fetching movies');
-          const data = await res.json();
-          if (data.Response === 'False') throw new Error(data.Error);
-          setMovies(data.Search);
-          setError('');
-        } catch (error) {
-          if (error.name !== 'AbortError') setError(error.message);
-        } finally {
-          setLoading(false);
-        }
-      }
-
-      if (query.length < 3) {
-        setMovies([]);
-        setError('');
-        return;
-      }
-
-      handleCloseMovie();
-      fetchMovies();
-
-      return function () {
-        controller.abort();
-      };
-    },
-    [query]
-  );
 
   return (
     <>

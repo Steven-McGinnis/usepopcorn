@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 /**
  * Search component renders an input field for searching movies.
  *
@@ -7,6 +9,22 @@
  * @returns {JSX.Element} The rendered input field.
  */
 function Search({ query, setQuery }) {
+  const inputEl = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener('keydown', (e) => {
+      if (document.activeElement === inputEl.current) {
+        return;
+      }
+
+      if (e.key === 'Enter') {
+        inputEl.current.focus();
+        setQuery('');
+      }
+    });
+    inputEl.current.focus();
+  }, [setQuery]);
+
   return (
     <input
       className='search'
@@ -14,6 +32,7 @@ function Search({ query, setQuery }) {
       placeholder='Search movies...'
       value={query}
       onChange={(e) => setQuery(e.target.value)}
+      ref={inputEl}
     />
   );
 }
