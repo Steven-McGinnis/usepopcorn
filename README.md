@@ -1,70 +1,219 @@
-# Getting Started with Create React App
+Steven-McGinnis: Create a markdown readme for this project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Create a README file for the project that includes an overview, installation instructions, usage, and a brief description of each component.
 
-## Available Scripts
+````markdown
+# usePopcorn
 
-In the project directory, you can run:
+usePopcorn is a React application that allows users to search for movies, view details, and manage a list of watched movies. It uses the OMDB API to fetch movie data.
 
-### `npm start`
+## Table of Contents
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [Installation](#installation)
+- [Usage](#usage)
+- [Components](#components)
+- [Custom Hooks](#custom-hooks)
+- [License](#license)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/usepopcorn.git
+   ```
+````
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Navigate to the project directory:
+   ```sh
+   cd usepopcorn
+   ```
+3. Install the dependencies:
+   ```sh
+   npm install
+   ```
 
-### `npm run build`
+## Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Start the development server:
+   ```sh
+   npm start
+   ```
+2. Open your browser and navigate to `http://localhost:3000`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Components
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `App.js`
 
-### `npm run eject`
+The main application component that handles fetching and displaying movies, managing the watched movies list, and handling user interactions.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### `NavBar.js`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+A navigation bar component that includes a search input and displays the number of search results.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### `MovieList.js`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+A component to render a list of movies.
 
-## Learn More
+### `MovieDetails.js`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+A component that displays detailed information about a selected movie, allows the user to rate the movie, and add it to the watched list.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `Movie.js`
 
-### Code Splitting
+A component to display a movie item.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### `Main.js`
 
-### Analyzing the Bundle Size
+A component that wraps its children with a `<main>` HTML element.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### `Logo.js`
 
-### Making a Progressive Web App
+A component that displays a popcorn emoji and the title "usePopcorn".
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### `Loader.js`
 
-### Advanced Configuration
+A component that displays a loading message.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### `ErrorMessage.js`
 
-### Deployment
+A component that displays an error message with an icon.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### `Box.js`
 
-### `npm run build` fails to minify
+A component that can toggle its visibility.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### `WatchedMoviesList.js`
+
+A component that displays a list of watched movies.
+
+### `WatchedSummary.js`
+
+A component that displays a summary of watched movies.
+
+### `NumResults.js`
+
+A component that displays the number of search results.
+
+## Custom Hooks
+
+### `useMovies.js`
+
+A custom hook to fetch movies based on a search query.
+
+## License
+
+This project is licensed under the MIT License.
+
+````
+
+
+Steven-McGinnis: write it into this existing readme
+
+GitHub Copilot: ### [README.md](file:///Users/proje/Desktop/usepopcorn/README.md)
+
+Integrate the new content into the existing README file.
+
+```markdown
+# usePopcorn
+
+usePopcorn is a React application that allows users to search for movies, view details, and manage a list of watched movies. It uses the OMDB API to fetch movie data.
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Components](#components)
+- [Custom Hooks](#custom-hooks)
+- [License](#license)
+
+## Installation
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/usepopcorn.git
+````
+
+2. Navigate to the project directory:
+   ```sh
+   cd usepopcorn
+   ```
+3. Install the dependencies:
+   ```sh
+   npm install
+   ```
+
+## Usage
+
+1. Start the development server:
+   ```sh
+   npm start
+   ```
+2. Open your browser and navigate to `http://localhost:3000`.
+
+## Components
+
+### `App.js`
+
+The main application component that handles fetching and displaying movies, managing the watched movies list, and handling user interactions.
+
+### `NavBar.js`
+
+A navigation bar component that includes a search input and displays the number of search results.
+
+### `MovieList.js`
+
+A component to render a list of movies.
+
+### `MovieDetails.js`
+
+A component that displays detailed information about a selected movie, allows the user to rate the movie, and add it to the watched list.
+
+### `Movie.js`
+
+A component to display a movie item.
+
+### `Main.js`
+
+A component that wraps its children with a `<main>` HTML element.
+
+### `Logo.js`
+
+A component that displays a popcorn emoji and the title "usePopcorn".
+
+### `Loader.js`
+
+A component that displays a loading message.
+
+### `ErrorMessage.js`
+
+A component that displays an error message with an icon.
+
+### `Box.js`
+
+A component that can toggle its visibility.
+
+### `WatchedMoviesList.js`
+
+A component that displays a list of watched movies.
+
+### `WatchedSummary.js`
+
+A component that displays a summary of watched movies.
+
+### `NumResults.js`
+
+A component that displays the number of search results.
+
+## Custom Hooks
+
+### `useMovies.js`
+
+A custom hook to fetch movies based on a search query.
+
+## License
+
+This project is licensed under the MIT License.
+
+```
+
+```
