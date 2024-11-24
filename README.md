@@ -33,11 +33,10 @@ While developing usePopcorn, I gained hands-on experience with:
 To run the app locally:
 
 1. Clone the repository:
+
    ```sh
    git clone https://github.com/yourusername/usepopcorn.git
    ```
-
-````
 
 2. Navigate to the project directory:
    ```sh
@@ -89,4 +88,7 @@ A big thank you to Jonas Schmedtmann for designing an engaging and practical Rea
 ```
 
 ```
-````
+
+```
+
+```
