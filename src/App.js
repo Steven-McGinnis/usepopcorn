@@ -55,11 +55,22 @@ const KEY = '8a876b0e';
  */
 export default function App() {
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [query, setQuery] = useState('');
   const [selectedId, setSelectedId] = useState('');
+
+  /**
+   * State hook to manage the list of watched items.
+   * Initializes the state with the value stored in localStorage under the key 'watched'.
+   * If no value is found in localStorage, initializes with an empty array.
+   *
+   * @returns {Array} The initial state value for the watched items.
+   */
+  const [watched, setWatched] = useState(function () {
+    const storedValue = localStorage.getItem('watched');
+    return storedValue ? JSON.parse(storedValue) : [];
+  });
 
   /**
    * Handles the selection of a movie by its ID.
@@ -86,6 +97,8 @@ export default function App() {
    */
   function handleAddWatched(movie) {
     setWatched((watched) => [...watched, movie]);
+
+    // localStorage.setItem('watched', JSON.stringify([...watched, movie]));
   }
 
   /**
@@ -96,6 +109,18 @@ export default function App() {
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
+
+  /**
+   * Updates the watched list in localStorage whenever the watched state changes.
+   * This effect runs whenever the watched state changes.
+   * It updates the watched list in localStorage with the new watched state.
+   * @function
+   * @param {Array} watched - The watched list to store in localStorage.
+   * @returns {undefined}
+   */
+  useEffect(() => {
+    localStorage.setItem('watched', JSON.stringify(watched));
+  }, [watched]);
 
   useEffect(
     /**
