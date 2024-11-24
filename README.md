@@ -1,4 +1,3 @@
-````markdown
 # usePopcorn 🍿
 
 usePopcorn is a React application that enables users to search for movies, view details, and manage a list of watched movies. This project is part of Jonas Schmedtmann's Udemy course, Master Modern React from Beginner to Advanced! It serves as a hands-on opportunity to deepen my understanding of React concepts while working with a real-world API.
@@ -37,6 +36,7 @@ To run the app locally:
    ```sh
    git clone https://github.com/yourusername/usepopcorn.git
    ```
+
 ````
 
 2. Navigate to the project directory:
@@ -89,3 +89,4 @@ A big thank you to Jonas Schmedtmann for designing an engaging and practical Rea
 ```
 
 ```
+````
