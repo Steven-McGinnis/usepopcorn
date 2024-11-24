@@ -84,11 +84,3 @@ While the current version is fully functional, potential enhancements include:
 ## 🙏 Acknowledgments
 
 A big thank you to Jonas Schmedtmann for designing an engaging and practical React course that bridges foundational learning with real-world applications.
-
-```
-
-```
-
-```
-
-```
