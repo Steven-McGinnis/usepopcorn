@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useKey } from '../useKey';
 
 /**
  * Search component renders an input field for searching movies.
@@ -11,19 +12,12 @@ import { useEffect, useRef } from 'react';
 function Search({ query, setQuery }) {
   const inputEl = useRef(null);
 
-  useEffect(() => {
-    document.addEventListener('keydown', (e) => {
-      if (document.activeElement === inputEl.current) {
-        return;
-      }
+  useKey('Enter', function () {
+    if (document.activeElement === inputEl.current) return;
 
-      if (e.key === 'Enter') {
-        inputEl.current.focus();
-        setQuery('');
-      }
-    });
     inputEl.current.focus();
-  }, [setQuery]);
+    setQuery('');
+  });
 
   return (
     <input
